@@ -9,9 +9,7 @@ function saveBookmark(e) {
   //console.log(siteName);
   //console.log(siteUrl);
 
-  //validation for empty form
-  if (!siteName || siteUrl) {
-    alert("Please fill in the form");
+  if (validateForm(siteName, siteUrl)) {
     return false;
   }
 
@@ -89,4 +87,22 @@ function deleteBookmark(url) {
 
   //refetch bookmarks
   fetchBookmarks();
+}
+
+function validateForm(siteName, siteUrl) {
+  //validation for empty form
+  if (!siteName || !siteUrl) {
+    alert("Please fill in the form");
+    return false;
+  }
+
+  var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+  var regex = new RegExp(expression);
+
+  if (!siteUrl.match(regex)) {
+    alert("Please use valid URL");
+    return false;
+  }
+
+  return true;
 }
