@@ -9,7 +9,7 @@ function saveBookmark(e) {
   //console.log(siteName);
   //console.log(siteUrl);
 
-  if (validateForm(siteName, siteUrl)) {
+  if (!validateForm(siteName, siteUrl)) {
     return false;
   }
 
@@ -35,6 +35,10 @@ function saveBookmark(e) {
     localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }
 
+  //Clear form after submission
+  document.getElementById("myForm").reset();
+
+  //refetch bookmarks
   fetchBookmarks();
 
   //Prevent form from submitting
